@@ -1,7 +1,7 @@
 
 const	TRIGGER_ITEM = 6560,     // minor replenishment potable
 		primaryBrooches = [51028,51011]   // 51028 - marrow, 51011 - quatrefoil
-		secondaryBrooch = 19706  // quickcarve
+		secondaryBrooch = [19706]  // quickcarve
 		
 module.exports = function broochSwap(dispatch){
 	let	cid,
@@ -27,7 +27,7 @@ module.exports = function broochSwap(dispatch){
 			if (primaryBrooches.includes (event.items[i].item)) {
 				primaryBroochSlot = event.items[i].slot;
 			}
-			if (event.items[i].item == secondaryBrooch) {
+			if (secondaryBrooches.includes (event.items[i].item)) {
 				secondaryBroochSlot = event.items[i].slot;
 			}
 		}
