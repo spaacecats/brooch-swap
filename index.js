@@ -6,8 +6,9 @@ const	TRIGGER_ITEM = 6560,     // minor replenishment potable
 module.exports = function broochSwap(dispatch){
 	let	cid,
 		location,
-	    	secondaryBrooch,
+		timeout,
 		secondaryBroochSlot,
+		secondaryBrooch,
 		primaryBroochSlot;
 	
 	dispatch.hook('S_LOGIN', 1, event =>{cid = event.cid})
@@ -19,7 +20,7 @@ module.exports = function broochSwap(dispatch){
 			slot: secondaryBroochSlot,
 			unk: 0
 		})
-		timeout = setTimeout(broochSwap,200)
+		timeout = setTimeout(useSecondary,150)
 		}
 	})
 		
@@ -35,7 +36,7 @@ module.exports = function broochSwap(dispatch){
 		}
 	})
 	
-	function broochSwap(){
+	function useSecondary(){
 		clearTimeout(timeout)
 		dispatch.toServer('C_USE_ITEM', 1,{
 			ownerId: cid,
@@ -57,10 +58,15 @@ module.exports = function broochSwap(dispatch){
 			unk10: 0,
 			unk11: 1
 		})
+		primary = setTimeout(equpipPrimary,150)
+	}
+	function equpipPrimary(){
+		clearTimeout(primary)
 		dispatch.toServer('C_EQUIP_ITEM', 1,{
 			cid: cid,
 			slot: primaryBroochSlot,
 			unk: 0
 		})
 	}
+	
 }
