@@ -24,7 +24,7 @@ module.exports = function broochSwap(dispatch){
 		}
 	})
 		
-	dispatch.hook('S_INVEN', 3, event =>{
+	dispatch.hook('S_INVEN', 5, event =>{
 		for ( var i = 0; i < event.items.length; i++) {
 			if (primaryBrooches.includes (event.items[i].item)) {
 				primaryBroochSlot = event.items[i].slot;
